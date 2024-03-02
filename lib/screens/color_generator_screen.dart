@@ -15,17 +15,23 @@ class _ColorGeneratorScreenState extends State<ColorGeneratorScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          final newColor = ColorUtils.generateRandomColor();
-          _color = ColorUtils.uniqueColor(_color, newColor);
-        });
+        setState(
+          () {
+            final newColor = ColorUtils.generateRandomColor();
+            _color = ColorUtils.uniqueColor(_color, newColor);
+          },
+        );
       },
-      child: Scaffold(
-        backgroundColor: _color,
-        body: const Center(
-          child: Text(
-            'Hello there',
-            style: TextStyle(fontSize: 32),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        color: _color,
+        child: const Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+            child: Text(
+              'Hello there',
+              style: TextStyle(fontSize: 32),
+            ),
           ),
         ),
       ),
